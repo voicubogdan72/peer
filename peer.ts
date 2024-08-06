@@ -1,6 +1,19 @@
 import Peer, { DataConnection } from "peerjs";
 import readlineSync from "readline-sync";
 
+// Ensure WebRTC is available in Node.js
+const wrtc = require("wrtc");
+(global as any).RTCPeerConnection = wrtc.RTCPeerConnection;
+(global as any).RTCSessionDescription = wrtc.RTCSessionDescription;
+(global as any).RTCIceCandidate = wrtc.RTCIceCandidate;
+(global as any).navigator = {
+  mediaDevices: {
+    getUserMedia: () => {
+      throw new Error("getUserMedia is not supported in this environment.");
+    },
+  },
+};
+
 class PeerBalance {
   private peer: Peer;
   private conn: DataConnection | null = null;
@@ -101,6 +114,6 @@ class PeerBalance {
 
 const peerId = readlineSync.question("Enter your peer ID: ").trim();
 const peerServerHost = "localhost";
-const peerServerPort = 8000;
+const peerServerPort = 9000;
 
 new PeerBalance(peerId, peerServerHost, peerServerPort);
