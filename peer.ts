@@ -114,6 +114,6 @@ class PeerBalance {
 
 const peerId = readlineSync.question("Enter your peer ID: ").trim();
 const peerServerHost = "localhost";
-const peerServerPort = 9000;
+const peerServerPort = 8000;
 
 new PeerBalance(peerId, peerServerHost, peerServerPort);
