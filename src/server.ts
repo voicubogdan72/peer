@@ -1,5 +1,5 @@
 import express from "express";
-import { ExpressPeerServer } from "peer";
+import ExpressPeerServer from "peerjs";
 
 const app = express();
 const server = app.listen(8000, () => {
